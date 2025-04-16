@@ -1,0 +1,86 @@
+/* Background styling */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #3c9d91;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Form container */
+  form {
+    background: #fff;
+    padding: 40px 30px;
+    width: 320px;
+    border-radius: 6px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    position: relative;
+  }
+  
+  /* Login title */
+  form h2 {
+    color: #d32f2f;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+  
+  /* Input fields */
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 25px;
+    padding: 10px 5px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  input[type="text"]:focus,
+  input[type="password"]:focus {
+    border-bottom: 1px solid #d32f2f;
+  }
+  
+  /* Forgot password link */
+  form a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #aaa;
+    text-decoration: none;
+  }
+  
+  form a:hover {
+    color: #d32f2f;
+  }
+  
+  /* Floating red circle button */
+  .fab {
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    width: 50px;
+    height: 50px;
+    background-color: #d32f2f;
+    color: white;
+    border-radius: 50%;
+    font-size: 28px;
+    line-height: 50px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .fab:hover {
+    background-color: #b71c1c;
+  }
+  

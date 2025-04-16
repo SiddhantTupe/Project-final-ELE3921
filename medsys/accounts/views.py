@@ -11,11 +11,10 @@ def login_view(request):
         if user is not None:
             login(request, user)
             return redirect(request.GET.get("next", "index"))
-        return render(request, "login.html", {"username": username, "error": "Wrong password"})
-    return render(request, "login.html")
+        return render(request, "registration/login.html", {"username": username, "error": "Wrong password"})
+    return render(request, "registration/login.html")
 
 
 def logout_view(request):
     logout(request)
     return redirect("index")
-

@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> Hospital / {% block title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Hospital{% endblock %}</title>
+    {% load static %}
+    {% block styles %}{% endblock %}
 </head>
 
 <body>
-    
+    <!-- Add any header, navigation, or other global content here -->
+
+    <main>
+        {% block main %}
+        <!-- Default content can go here, or it will be replaced by the child template -->
+        {% endblock %}
+    </main>
+
+    <!-- Footer or other bottom content -->
+</body>
+</html>
