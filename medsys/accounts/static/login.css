@@ -1,86 +1,113 @@
-/* Background styling */
+:root {
+  --input-focus: #2f6b3a; 
+  --font-color: #355e3b; 
+  --font-color-sub: #d4e4d5; 
+  --bg-color: #e0f2e9; 
+  --main-color: #355e3b; 
+  --button-bg: #ffffff; 
+  --button-border: #355e3b; 
+  --button-hover: #e0f2e9; 
+  --highlight-color: #355e3b; 
+  --pattern-fill: #b8d8be; 
+  --pattern-stroke: #7ab89a; 
+  --pattern-lines: #355e3b; 
+}
+
+
 body {
-    margin: 0;
-    padding: 0;
-    background-color: #3c9d91;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Form container */
-  form {
-    background: #fff;
-    padding: 40px 30px;
-    width: 320px;
-    border-radius: 6px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    position: relative;
-  }
-  
-  /* Login title */
-  form h2 {
-    color: #d32f2f;
-    margin-bottom: 30px;
-    text-transform: uppercase;
-    font-size: 20px;
-    font-weight: bold;
-    letter-spacing: 1px;
-  }
-  
-  /* Input fields */
-  input[type="text"],
-  input[type="password"] {
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid #ccc;
-    margin-bottom: 25px;
-    padding: 10px 5px;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.3s;
-  }
-  
-  input[type="text"]:focus,
-  input[type="password"]:focus {
-    border-bottom: 1px solid #d32f2f;
-  }
-  
-  /* Forgot password link */
-  form a {
-    display: block;
-    text-align: center;
-    margin-top: 20px;
-    font-size: 13px;
-    color: #aaa;
-    text-decoration: none;
-  }
-  
-  form a:hover {
-    color: #d32f2f;
-  }
-  
-  /* Floating red circle button */
-  .fab {
-    position: absolute;
-    right: -20px;
-    top: -20px;
-    width: 50px;
-    height: 50px;
-    background-color: #d32f2f;
-    color: white;
-    border-radius: 50%;
-    font-size: 28px;
-    line-height: 50px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .fab:hover {
-    background-color: #b71c1c;
-  }
-  
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  position: relative;
+  background: linear-gradient(to bottom right, #e0f2e9, #b8d8be);
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48ZmlsdGVyIGlkPSJhIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMTkuNSIgbnVtT2N0YXZlcz0iMTAiIHJlc3VsdD0idHVyYnVsZW5jZSIvPjxmZUNvbXBvc2l0ZSBvcGVyYXRvcj0iaW4iIGluPSJ0dXJidWxlbmNlIiBpbjI9IlNvdXJjZUFscGhhIiByZXN1bHQ9ImNvbXBvc2l0ZSIvPjxmZUNvbG9yTWF0cml4IGluPSJjb21wb3NpdGUiIHR5cGU9Imx1bWluYW5jZVRvQWxwaGEiLz48ZmVCbGVuZCBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJjb21wb3NpdGUiIG1vZGU9ImNvbG9yLWJ1cm4iLz48L2ZpbHRlcj48L2RlZnM+PGcgZmlsdGVyPSJ1cmwoJyNhJykiPjxwYXRoIGZpbGw9IiNCOEQ4QkUiIGQ9Ik0wIDBoMTAwdjEwMEgweiIvPjxwYXRoIGQ9Ik0wIDB2MTAwaDEwMFYwWiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2U9IiM3QUI4OUEiIGZpbGw9IiMwMDAwIi8+PHBhdGggZmlsbD0iIzM1NUUzQiIgZD0iTTUwIDBoMXYxMDBoLTF6Ii8+PHBhdGggZmlsbD0iIzM1NUUzQiIgZD0iTTAgNTBoMTAwdjFIMHoiLz48L2c+PC9zdmc+");
+  mask: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0));
+}
+
+form {
+  width: 340px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  border-radius: 5px;
+  border: 2px solid var(--highlight-color); 
+  background: var(--bg-color);
+  box-shadow: 4px 4px var(--main-color);
+  position: relative;
+  z-index: 1;
+}
+
+
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--highlight-color); 
+  background: #ffffff; 
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #355e3b; 
+  box-sizing: border-box;
+  box-shadow: 4px 4px var(--main-color);
+  outline: none;
+  transition: border 0.3s;
+}
+
+input[type="text"]::placeholder,
+input[type="password"]::placeholder {
+  color: #a5a4a4; 
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border: 2px solid var(--input-focus);
+}
+
+button[type="submit"] {
+  width: 100%;
+  background: var(--button-bg);
+  color: var(--font-color);
+  border: 2px solid var(--highlight-color); 
+  font-weight: 600;
+  font-size: 16px;
+  padding: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 4px 4px var(--main-color);
+  transition: background 0.3s, transform 0.1s;
+}
+
+button[type="submit"]:hover {
+  background: var(--button-hover);
+}
+
+button[type="submit"]:active {
+  box-shadow: 0px 0px var(--main-color);
+  transform: translate(3px, 3px);
+}
+
+button[type="submit"]::after {
+  content: "→";
+  font-size: 18px;
+}
