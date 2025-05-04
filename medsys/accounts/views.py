@@ -10,7 +10,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect(request.GET.get("next", "index"))
+            return redirect('index')
         return render(request, "registration/login.html", {"username": username, "error": "Wrong password"})
     return render(request, "registration/login.html")
 
