@@ -19,9 +19,11 @@ from django.contrib import admin
 from django.urls import path, include
 
 from medapp.views import index
+from accounts.views import login_view
 
 urlpatterns = [
-    path("", index, name="index"),
+    path("", login_view, name="login"),
     path("accounts/", include("accounts.urls")),
+    path("", include("medapp.urls")),
     path("admin/", admin.site.urls),
 ]
