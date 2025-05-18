@@ -31,6 +31,7 @@ def logout_view(request):
 @login_required
 def doctor_dashboard(request):
     return render(request, 'registration/doctorgroup.html')
+    
 
 @login_required
 def staff_dashboard(request):

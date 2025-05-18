@@ -1,9 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Hello!</title>
-</head>
-<body>
-    <h2>Hello, doctor. {{ username }}</h2>
-</body>
-</html>
+{% load static %}
+{% block title %}Dashboard - MedSys{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'medsys/css/doctor_dashboard.css' %}">
+{% endblock %}
+
+{% block header %} Doctor Dashboard {% endblock %}
+{% block content %} 
+<div class="w_banner">   
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h2>Welcome, Dr. {{ request.user.first_name }} {{ request.user.last_name }}</h2>
+            <p class="text-muted">{{ today_date|date:"l, F j, Y" }}</p>
+        </div>
+        <div class="col-md-4 text-md-end">
+{% endblock %}
