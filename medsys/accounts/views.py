@@ -28,7 +28,6 @@ def logout_view(request):
     logout(request)
     return redirect("index")
 
-<<<<<<< HEAD
 @login_required
 def doctor_dashboard(request):
     return render(request, 'registration/doctorgroup.html')
@@ -48,19 +47,3 @@ def patient_dashboard(request):
 @login_required
 def default_dashboard(request):
     return render(request, 'registration/default.html')
-=======
-def homepage_role(request):
-    user= request.user
-    groups = user.groups.values_list('name', flat=True)
-    if 'Doctors' in groups:
-        return render(request, 'doctor_homepage.html', {'user': user})
-    elif 'Nurses' in groups:
-        return render(request, 'nurse_homepage.html', {'user': user})
-    elif 'Inventory head' in groups:
-        return render(request, 'inventory_head_homepage.html', {'user': user})
-    elif 'Patients' in groups:
-        return render(request, 'patient_homepage.html', {'user': user})
-    else:
-        return render(request, 'homepage.html', {'user': user})
-    
->>>>>>> 86e237e447cff355bdbfe82d56c807692529a1dc
