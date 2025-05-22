@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 # ------------------------------
 
 class MedicineCategory(models.Model):
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
     def __str__(self):
         return self.name
@@ -123,5 +123,4 @@ class PrescriptionItem(models.Model):
     duration_days = models.IntegerField()
     def __str__(self):
         return f"{self.medicine.name} for {self.prescription.patient}"
-
 

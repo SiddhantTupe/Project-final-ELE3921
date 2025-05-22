@@ -10,5 +10,6 @@ urlpatterns = [
     path("inventory/", views.inventory_dashboard, name="inventory_dashboard"),
     path("patient/", views.patient_dashboard, name="patient_dashboard"),
     path("dashboard/", views.default_dashboard, name="default_dashboard"),
+    path('accounts/add-patient/', views.add_patient, name='add_patient'),
 ]
 

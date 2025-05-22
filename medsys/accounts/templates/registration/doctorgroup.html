@@ -12,6 +12,7 @@
         <div class="col-md-8">
             <h2>Welcome, Dr. {{ request.user.first_name }} {{ request.user.last_name }}</h2>
             <p class="text-muted">{{ today_date|date:"l, F j, Y" }}</p>
+            <P> Add <a href="{% url 'add_patient' %}"> New Patient </a> </p>
         </div>
         <div class="col-md-4 text-md-end">
 {% endblock %}

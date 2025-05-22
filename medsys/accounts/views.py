@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
+from medapp.forms import PatientForm
 
 # Create your views here.
 
@@ -31,7 +32,6 @@ def logout_view(request):
 @login_required
 def doctor_dashboard(request):
     return render(request, 'registration/doctorgroup.html')
-    
 
 @login_required
 def staff_dashboard(request):
@@ -48,3 +48,20 @@ def patient_dashboard(request):
 @login_required
 def default_dashboard(request):
     return render(request, 'registration/default.html')
+
+
+# Form for Doctors to add Patients. 
+def is_doctor(user):
+    return user.groups.filter(name='Doctors').exists()
+
+@login_required
+@user_passes_test(is_doctor)
+def add_patient(request):
+    if request.method == 'POST':
+        form = PatientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('doctor_dashboard')  # Change if your dashboard URL is different
+    else:
+        form = PatientForm()
+    return render(request, 'forms/patients.html', {'form': form})
