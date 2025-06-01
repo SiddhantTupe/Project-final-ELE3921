@@ -18,13 +18,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from medapp.views import index
 from accounts.views import login_view
 
 urlpatterns = [
     path("", login_view, name="login"),
     path("accounts/", include("accounts.urls")),
-    path("", include("medapp.urls")),
     path("admin/", admin.site.urls),
-    path("", include('django.contrib.auth.urls')),
+    path("auth/", include('django.contrib.auth.urls')), # standard login/logout URLs
 ]
+

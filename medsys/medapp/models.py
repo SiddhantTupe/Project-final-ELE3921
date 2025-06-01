@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 class MedicineCategory(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
+
     def __str__(self):
         return self.name
 
@@ -61,44 +62,47 @@ class Staff(models.Model):
 # ------------------------------
 
 class Patient(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    date_of_birth = models.DateField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='patient_user')
+    date_of_birth = models.DateField(null=True)
     gender = models.CharField(max_length=10)
     blood_group = models.CharField(max_length=5)
-    phone = models.CharField(max_length=20)
-    emergency_contact = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
+    phone = models.CharField(max_length=20, null=True)
+    emergency_contact = models.CharField(max_length=100, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
     def __str__(self):
         return f"{self.user.get_full_name()}"
 
 class PatientMedicalHistory(models.Model):
-    STATUS_CHOICES = [
-        ('ACTIVE', 'Active'),
-        ('RESOLVED', 'Resolved'),
-        ('CHRONIC', 'Chronic'),
+    STATUS_CHOICES1 = [
+        ('active', 'Active'),
+        ('resolved', 'Resolved'),
+        ('chronic', 'Chronic'),
     ]
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='medical_histories')
     condition_name = models.CharField(max_length=100)
     diagnosis_date = models.DateField()
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES)
+    status1 = models.CharField(max_length=20, choices=STATUS_CHOICES1, null=True, blank=True)
     notes = models.TextField(blank=True, null=True)
     def __str__(self):
         return f"{self.condition_name} for {self.patient}"
 
+ROOM_CHOICES = [(i, str(i)) for i in range(1, 21)]
+
 class AdmissionRecord(models.Model):
     STATUS_CHOICES = [
-        ('ADMITTED', 'Admitted'),
-        ('DISCHARGED', 'Discharged'),
-        ('TRANSFERRED', 'Transferred'),
+        ('admitted', 'Admitted'),
+        ('discharged', 'Discharged'),
+        ('transferred', 'Transferred'),
     ]
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='admissions')
     admission_date = models.DateTimeField()
     discharge_date = models.DateTimeField(null=True, blank=True)
-    room_number = models.CharField(max_length=20)
-    primary_doctor = models.ForeignKey(Staff, on_delete=models.SET_NULL, null=True, related_name='primary_admissions')
+    room_number = models.PositiveSmallIntegerField(choices=ROOM_CHOICES)
+    primary_doctor = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='primary_admissions')
     admission_reason = models.TextField()
     discharge_summary = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
     def __str__(self):
         return f"Admission {self.id} for {self.patient}"
 

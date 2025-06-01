@@ -13,3 +13,12 @@
   margin-bottom: 0.25rem;
   color: #4e73df;
   font-weight: 700;
+}
+
+a {
+  pointer-events: auto;
+  position: relative;
+  z-index: 10;
+  cursor: pointer;
+}
+

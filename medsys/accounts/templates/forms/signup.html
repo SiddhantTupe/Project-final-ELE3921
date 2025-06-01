@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'signup.css' %}">
+{% endblock %}
+
+{% block main %}
+
+<div class="main">
+<form method="post" class="form_container">
+  <div class="title_container">
+  <h1>Register</h1>
+  <span class="subtitle"><h2>Get started with our app, just create an account and enjoy the experience.</h2></span>
+  </div>
+    {% csrf_token %}
+
+    <h3>Account Info</h3>
+    <div class="form_input">
+      {{ user_form.as_p }}
+    </div>
+    <h3>Patient Info</h3>
+    <div class="form_input">
+      {{ patient_form.as_p }}
+    </div>
+
+    <button type="submit">Sign Up</button>
+</form>
+
+</div>
+{% endblock %}

@@ -1,9 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Hello!</title>
-</head>
-<body>
-    <h2>Hello, staff. {{ username }}</h2>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Dashboard - MedSys{% endblock %}
+
+{% block styles %}
+{# <link rel="stylesheet" href="{% static 'doctor_dashboard.css' %}"> #}
+{% endblock %}
+
+{% block header %} Staff Dashboard {% endblock %}
+{% block content %} 
+<h2>Hello, staff. {{ username }}</h2>
+        <p> Add <a href="{% url 'add_prescription' %}"> New Prescription </a> </p>
+        </div>
+        <div class="col-md-4 text-md-end">
+{% endblock %}
+
+

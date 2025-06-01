@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "medapp.apps.MedappConfig",
+    "medapp",
 ]
 
 MIDDLEWARE = [
@@ -127,7 +127,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 import os
 STATIC_URL = '/static/'
   
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR / 'accounts' / 'static')]
 
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/index/'
+LOGIN_REDIRECT_URL = '/accounts/redirect/'

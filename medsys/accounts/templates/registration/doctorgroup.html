@@ -1,18 +1,54 @@
+{% extends 'base.html' %}
 {% load static %}
 {% block title %}Dashboard - MedSys{% endblock %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'medsys/css/doctor_dashboard.css' %}">
+{% block styles %}
+<link rel="stylesheet" href="{% static 'doctor_dashboard.css' %}"> 
 {% endblock %}
 
 {% block header %} Doctor Dashboard {% endblock %}
-{% block content %} 
-<div class="w_banner">   
+
+{% block main %} 
+<div class="welcome-banner">   
     <div class="row align-items-center">
         <div class="col-md-8">
             <h2>Welcome, Dr. {{ request.user.first_name }} {{ request.user.last_name }}</h2>
+            <h3 class="mt-4">My Patients</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>Date Added</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in patient_records %}
+  {% if record.patient %}
+    <tr>
+      <td>
+        <a href="{% url 'patient_dashboard' patient_id=record.patient.id %}">
+        {{ record.patient.user.get_full_name }}
+        </a>
+      </td>
+      <td>{{ record.created_at|date:"Y-m-d" }}</td>
+      <td>
+        <a href="{% url 'edit_patient' patient_id=record.patient.id %}">Edit</a>
+      </td>
+    </tr>
+  {% endif %}
+{% empty %}
+  <tr><td colspan="3">No patients added yet.</td></tr>
+{% endfor %}
+                </tbody>
+            </table>    
+
             <p class="text-muted">{{ today_date|date:"l, F j, Y" }}</p>
-            <P> Add <a href="{% url 'add_patient' %}"> New Patient </a> </p>
+            <p><a href="{% url 'add_patient' %}">New Patients Details</a></p>
         </div>
         <div class="col-md-4 text-md-end">
+            <!-- You can add sidebar or doctor info here -->
+        </div>
+    </div>
+</div>
 {% endblock %}
+

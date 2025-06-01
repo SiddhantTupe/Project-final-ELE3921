@@ -1,9 +1,48 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Hello!</title>
-</head>
-<body>
-    <h2>Hello, patient. {{ username }}</h2>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block main %}
+  <h2>{{ patient.user.first_name }} {{ patient.user.last_name }}</h2>
+
+  <h3>Account Details</h3>
+   <ul>
+    <li>Username: {{ patient.user.username }}</li>
+    <li>First Name: {{ patient.user.first_name}}</li>
+    <li>Last Name: {{ patient.user.last_name }}</li>
+    <li>Email: {{ patient.user.email }}</li>
+  </ul>
+
+  <h3>Personal Details</h3>
+  <ul> 
+      <li> Date of Birth: {{ patient.date_of_birth }} </li>
+      <li> Gender: {{ patient.gender }} </li>
+      <li> Blood Group: {{ patient.blood_group }} </li>
+      <li> Phone: {{ patient.phone }} </li>
+  </ul>
+
+  <h3>Medical History</h3>
+  <ul>
+    {% for record in history %}
+      <li> Condition: {{ record.condition_name }} </li>
+      <li> Diagnosed on: {{ record.diagnosis_date }} </li>
+      <li> Status: {{ record.status1 }} </li>
+      <li> Notes: {{ record.notes }}
+    {% empty %}
+      <li>No medical history records.</li>
+    {% endfor %}
+  </ul>
+
+  <h3>Admission Records</h3>
+  <ul>
+    {% for admission in admissions %}
+      <li>Room: {{ admission.room_number }} </li>
+      <li>Admission Date: {{ admission.admission_date }} </li>
+      <li>Reason: {{ admission.admission_reason }} </li>
+      <li>Discharge Date: {{ admission.discharge_date|default:"Ongoing" }} </li>
+      <li>Reason: {{ admission.discharge_summary }} </li>
+      <li>Status: {{ admission.status }} </li>
+        {% if admission.discharge_summary %}<strong>Discharge:</strong> {{ admission.discharge_summary }}{% endif %}
+    {% empty %}
+      <li>No admission records found.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

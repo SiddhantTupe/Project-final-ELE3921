@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'add_patient.css' %}">
+{% endblock %}
+
+{% block main %}
+  <h2>Add Prescription</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Prescription</button>
+  </form>
+{% endblock %}
