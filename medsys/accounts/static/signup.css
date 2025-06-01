@@ -13,6 +13,7 @@
     0px 7px 15px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
   border-radius: 11px;
   font-family:monospace;
+  transform: scale(0.85);
 }
 .title_container {
   display: flex;
@@ -60,21 +61,14 @@ body {
   height: 100vh;
   width: 100vw;
   position: relative;
-  background: linear-gradient(to bottom right, #e0f2e9, #b8d8be);
+  background-image: url('/static/images/medicine.jpg');
+  background-size:cover;
   font-family:monospace;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
 }
 
-body::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48ZmlsdGVyIGlkPSJhIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMTkuNSIgbnVtT2N0YXZlcz0iMTAiIHJlc3VsdD0idHVyYnVsZW5jZSIvPjxmZUNvbXBvc2l0ZSBvcGVyYXRvcj0iaW4iIGluPSJ0dXJidWxlbmNlIiBpbjI9IlNvdXJjZUFscGhhIiByZXN1bHQ9ImNvbXBvc2l0ZSIvPjxmZUNvbG9yTWF0cml4IGluPSJjb21wb3NpdGUiIHR5cGU9Imx1bWluYW5jZVRvQWxwaGEiLz48ZmVCbGVuZCBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJjb21wb3NpdGUiIG1vZGU9ImNvbG9yLWJ1cm4iLz48L2ZpbHRlcj48L2RlZnM+PGcgZmlsdGVyPSJ1cmwoJyNhJykiPjxwYXRoIGZpbGw9IiNCOEQ4QkUiIGQ9Ik0wIDBoMTAwdjEwMEgweiIvPjxwYXRoIGQ9Ik0wIDB2MTAwaDEwMFYwWiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2U9IiM3QUI4OUEiIGZpbGw9IiMwMDAwIi8+PHBhdGggZmlsbD0iIzM1NUUzQiIgZD0iTTUwIDBoMXYxMDBoLTF6Ii8+PHBhdGggZmlsbD0iIzM1NUUzQiIgZD0iTTAgNTBoMTAwdjFIMHoiLz48L2c+PC9zdmc+");
-  mask: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0));
-}
 
 .button {
   width: 100%;

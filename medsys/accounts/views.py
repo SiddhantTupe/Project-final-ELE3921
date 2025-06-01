@@ -7,6 +7,7 @@ from django.contrib.auth.models import Group
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseForbidden
 from django.urls import reverse
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 
@@ -37,7 +38,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect("index")
+    return redirect("login")
 
 # Default Dashboard
 
