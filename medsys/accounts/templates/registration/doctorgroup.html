@@ -6,9 +6,9 @@
 <link rel="stylesheet" href="{% static 'doctor_dashboard.css' %}"> 
 {% endblock %}
 
-{% block header %} Doctor Dashboard {% endblock %}
+{% block main %}
 
-{% block main %} 
+
 <div class="welcome-banner">   
     <div class="row align-items-center">
         <div class="col-md-8">
@@ -19,26 +19,27 @@
                     <tr>
                         <th>Patient Name</th>
                         <th>Date Added</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for record in patient_records %}
-  {% if record.patient %}
-    <tr>
-      <td>
-        <a href="{% url 'patient_dashboard' patient_id=record.patient.id %}">
-        {{ record.patient.user.get_full_name }}
-        </a>
-      </td>
-      <td>{{ record.created_at|date:"Y-m-d" }}</td>
-      <td>
-        <a href="{% url 'edit_patient' patient_id=record.patient.id %}">Edit</a>
-      </td>
-    </tr>
-  {% endif %}
-{% empty %}
-  <tr><td colspan="3">No patients added yet.</td></tr>
-{% endfor %}
+                        {% if record.patient %}
+                        <tr>
+                            <td>
+                                <a href="{% url 'patient_dashboard' patient_id=record.patient.id %}">
+                                {{ record.patient.user.get_full_name }}
+                                </a>
+                            </td>
+                            <td>{{ record.created_at|date:"Y-m-d" }}</td>
+                            <td>
+                                <a href="{% url 'edit_patient' patient_id=record.patient.id %}">Edit</a>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    {% empty %}
+                        <tr><td colspan="3">No patients added yet.</td></tr>
+                    {% endfor %}
                 </tbody>
             </table>    
 
@@ -46,9 +47,7 @@
             <p><a href="{% url 'add_patient' %}">New Patients Details</a></p>
         </div>
         <div class="col-md-4 text-md-end">
-            <!-- You can add sidebar or doctor info here -->
         </div>
     </div>
 </div>
 {% endblock %}
-

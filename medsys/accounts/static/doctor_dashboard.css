@@ -1,24 +1,121 @@
-/* Doctor Dashboard Styles */
 
-/* Welcome Banner */
+body {
+  background-image: url('/static/images/medicine.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family:monospace;
+  margin: 0;
+  padding: 0;
+  color: #000000;
+}
+
 .welcome-banner {
-  background-color: #f8f9fc;
-  border-radius: 0.5rem;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  margin: 2rem auto;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
 }
 
 .welcome-banner h2 {
-  margin-bottom: 0.25rem;
-  color: #4e73df;
+  margin-bottom: 0.5rem;
   font-weight: 700;
+  font-size: 2rem;
+}
+
+.welcome-banner h3 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #dadada;
+  padding-bottom: 0.3rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.table thead {
+  background-color: rgb(226, 226, 226);
+  font-weight: bold;
+}
+
+.table th, .table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.table a {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.table a:hover {
+  text-decoration: underline;
+}
+
+.text-muted {
+  color: #888;
+  font-size: 0.9rem;
 }
 
 a {
-  pointer-events: auto;
+  cursor: pointer;
   position: relative;
   z-index: 10;
-  cursor: pointer;
+  color:#000000
 }
+
+a.button-link {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+a.button-link:hover {
+  background-color: #1b5e20;
+}
+
+li {
+  padding: 0.6rem 1rem;
+  background-color: #f1f8e9;
+  border-radius: 6px;
+  margin: 0.4rem 0;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .welcome-banner {
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  .table th, .table td {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+}
+
 

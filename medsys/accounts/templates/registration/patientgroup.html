@@ -1,31 +1,39 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'patient_dashboard.css' %}">
+{% endblock %}
+
 {% block main %}
+<div class="container">
   <h2>{{ patient.user.first_name }} {{ patient.user.last_name }}</h2>
 
   <h3>Account Details</h3>
-   <ul>
+  <ul>
     <li>Username: {{ patient.user.username }}</li>
-    <li>First Name: {{ patient.user.first_name}}</li>
+    <li>First Name: {{ patient.user.first_name }}</li>
     <li>Last Name: {{ patient.user.last_name }}</li>
     <li>Email: {{ patient.user.email }}</li>
   </ul>
 
   <h3>Personal Details</h3>
-  <ul> 
-      <li> Date of Birth: {{ patient.date_of_birth }} </li>
-      <li> Gender: {{ patient.gender }} </li>
-      <li> Blood Group: {{ patient.blood_group }} </li>
-      <li> Phone: {{ patient.phone }} </li>
+  <ul>
+    <li>Date of Birth: {{ patient.date_of_birth }}</li>
+    <li>Gender: {{ patient.gender }}</li>
+    <li>Blood Group: {{ patient.blood_group }}</li>
+    <li>Phone: {{ patient.phone }}</li>
   </ul>
 
   <h3>Medical History</h3>
   <ul>
     {% for record in history %}
-      <li> Condition: {{ record.condition_name }} </li>
-      <li> Diagnosed on: {{ record.diagnosis_date }} </li>
-      <li> Status: {{ record.status1 }} </li>
-      <li> Notes: {{ record.notes }}
+      <li><strong>Condition:</strong> {{ record.condition_name }}</li>
+      <li><strong>Diagnosed on:</strong> {{ record.diagnosis_date }}</li>
+      <li><strong>Status:</strong> {{ record.status1 }}</li>
+      <li><strong>Notes:</strong> {{ record.notes }}</li>
     {% empty %}
       <li>No medical history records.</li>
     {% endfor %}
@@ -34,13 +42,12 @@
   <h3>Admission Records</h3>
   <ul>
     {% for admission in admissions %}
-      <li>Room: {{ admission.room_number }} </li>
-      <li>Admission Date: {{ admission.admission_date }} </li>
-      <li>Reason: {{ admission.admission_reason }} </li>
-      <li>Discharge Date: {{ admission.discharge_date|default:"Ongoing" }} </li>
-      <li>Reason: {{ admission.discharge_summary }} </li>
-      <li>Status: {{ admission.status }} </li>
-        {% if admission.discharge_summary %}<strong>Discharge:</strong> {{ admission.discharge_summary }}{% endif %}
+      <li><strong>Room:</strong> {{ admission.room_number }}</li>
+      <li><strong>Admission Date:</strong> {{ admission.admission_date }}</li>
+      <li><strong>Reason:</strong> {{ admission.admission_reason }}</li>
+      <li><strong>Discharge Date:</strong> {{ admission.discharge_date|default:"Ongoing" }}</li>
+      <li><strong>Summary:</strong> {{ admission.discharge_summary|default:"-" }}</li>
+      <li><strong>Status:</strong> {{ admission.status }}</li>
     {% empty %}
       <li>No admission records found.</li>
     {% endfor %}
