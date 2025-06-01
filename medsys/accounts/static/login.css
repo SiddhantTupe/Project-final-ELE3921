@@ -20,7 +20,9 @@ body {
   height: 100vh;
   position: relative;
   font-family:monospace;
-  background-image:url("{% static 'images/medicine.jpg' %}") ;
+  background-color: #7ab89a;
+  background: url("{% static 'images/medicine.jpg' %}");
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
