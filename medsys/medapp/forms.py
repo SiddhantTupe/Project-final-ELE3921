@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Patient, Prescription, PatientMedicalHistory, AdmissionRecord, ROOM_CHOICES
+from .models import Patient, Prescription, PatientMedicalHistory, AdmissionRecord, ROOM_CHOICES, Message
 
 class PatientSignUpForm(UserCreationForm):
     first_name = forms.CharField(required=True)
@@ -78,3 +78,12 @@ class PrescriptionForm(forms.ModelForm):
         model = Prescription
         fields = ['patient', 'doctor', 'notes']
         
+class MessageForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = ['recipient', 'subject', 'body']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Only show users in the "Staff" group
+        self.fields['recipient'].queryset = User.objects.filter(groups__name='Staff')

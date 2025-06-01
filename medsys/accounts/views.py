@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
-from medapp.forms import PatientForm, PrescriptionForm, PatientSignUpForm, HistoryForm, AdmissionForm
-from medapp.models import Patient, Prescription, PatientMedicalHistory, AdmissionRecord
+from medapp.forms import PatientForm, PrescriptionForm, PatientSignUpForm, HistoryForm, AdmissionForm, MessageForm
+from medapp.models import Patient, Prescription, PatientMedicalHistory, AdmissionRecord, Message
 from django.contrib.auth.models import Group
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseForbidden
-from django.urls import reverse
+from collections import defaultdict
+
 
 # Create your views here.
 
@@ -37,7 +38,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect("index")
+    return redirect("login")
 
 # Default Dashboard
 
@@ -209,7 +210,6 @@ def edit_patient(request, patient_id):
         'edit': True
     })
 
-
 #Form for Staff.
 
 @login_required
@@ -224,5 +224,42 @@ def add_prescription(request):
         form = PrescriptionForm()
     return render(request, 'forms/prescription.html', {'form': form})
 
+@login_required
+@user_passes_test(lambda u: u.groups.filter(name='Staff').exists())
+def inbox(request):
+    messages = Message.objects.filter(recipient=request.user).order_by('-timestamp')
+    return render(request, 'messaging/inbox.html', {'messages': messages})
+
 #Form for Patients.
 
+@login_required
+@user_passes_test(lambda u: u.groups.filter(name='Patients').exists())
+def send_message(request):
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.sender = request.user  # the patient
+            message.save()
+            return redirect('patient_dashboard', patient_id=request.user.patient_user.id)
+    else:
+        form = MessageForm()
+
+    return render(request, 'messaging/send_message.html', {'form': form})
+
+@login_required
+@user_passes_test(lambda u: u.groups.filter(name='Staff').exists())
+def inbox(request):
+    messages = Message.objects.filter(recipient=request.user).order_by('-timestamp')
+    
+    print("Logged in as:", request.user)
+    print("Messages for this user:")
+    
+    grouped = defaultdict(list)
+    for msg in messages:
+        print(f"- From {msg.sender} | Subject: {msg.subject}")
+        grouped[msg.sender].append(msg)
+        
+    grouped_messages = list(grouped.items())
+    
+    return render(request, 'messaging/inbox.html', {'grouped_messages': grouped_messages})

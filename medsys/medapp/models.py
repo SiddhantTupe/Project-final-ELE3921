@@ -128,3 +128,18 @@ class PrescriptionItem(models.Model):
     def __str__(self):
         return f"{self.medicine.name} for {self.prescription.patient}"
 
+
+# ------------------------------
+# Message
+# ------------------------------
+
+class Message(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')  # usually the patient
+    recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_messages')  # staff
+    subject = models.CharField(max_length=200)
+    body = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"From {self.sender.username} to {self.recipient.username} - {self.subject}"
