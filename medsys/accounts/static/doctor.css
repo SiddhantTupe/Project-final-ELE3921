@@ -1,7 +1,7 @@
 
 body {
   background-image: url('/static/images/medicine.jpg');
-  background-size: contain;
+  background-size: cover;
   font-family:'Courier New', Courier;
   margin: 0;
   padding: 0;
@@ -84,6 +84,7 @@ li {
   border-radius: 6px;
   margin: 0.4rem 0;
   width: 100%;
+  color: #000;
 }
 
 .container {

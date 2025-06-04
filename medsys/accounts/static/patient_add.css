@@ -71,8 +71,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  overflow:visible;         /* added */
-  padding-top: 40px;        /* added space from top */
+  overflow:visible;        
+  padding-top: 40px;        
 }
 
 
