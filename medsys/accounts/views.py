@@ -25,7 +25,7 @@ def login_view(request):
                 patient = get_object_or_404(Patient, user=user)
                 return redirect("patient_dashboard", patient_id=patient.id)
             else:
-                return redirect("default_dashboard")  # fallback
+                return redirect("default_dashboard")  
         else:
             return render(request, "registration/login.html", {
                 "username": username,
@@ -75,12 +75,11 @@ def is_staff(user):
 def staff_dashboard(request):
     prescriptions = Prescription.objects.filter(assistant_doctor=request.user).select_related('patient', 'medicine')
 
-    # Group prescriptions by patient
     grouped = defaultdict(list)
     for p in prescriptions:
         grouped[p.patient].append(p)
 
-    grouped_prescriptions = list(grouped.items())  # List of (patient, [prescriptions])
+    grouped_prescriptions = list(grouped.items())  
     
     assigned_patients = Patient.objects.filter(
         admissions__assistant_doctor=request.user
@@ -88,11 +87,6 @@ def staff_dashboard(request):
     
     return render(request, 'registration/staffgroup.html', {'grouped_prescriptions': grouped_prescriptions, 'assigned_patients': assigned_patients})
 
-# Inventory Head Dashboard
-
-@login_required
-def inventory_dashboard(request):
-    return render(request, 'registration/inventorygroup.html')
 
 # Patient Dashboard
 
@@ -147,7 +141,7 @@ def patient_signup_view(request):
         if user_form.is_valid() and patient_info_form.is_valid():
             user = user_form.save()
             patient = patient_info_form.save(commit=False)
-            patient.user = user  # Link patient to the new user
+            patient.user = user  
             patient.save()
             
             patients_group = Group.objects.get(name="Patients")
@@ -216,7 +210,6 @@ def edit_patient(request, patient_id):
             admission.patient = history.patient
             admission.primary_doctor = request.user
 
-            # patient fields are preserved via `instance=...`, no need to reset them
             history.save()
             admission.save()
 
@@ -273,7 +266,7 @@ def send_message(request):
         form = MessageForm(request.POST)
         if form.is_valid():
             message = form.save(commit=False)
-            message.sender = request.user  # the patient
+            message.sender = request.user 
             
             patient = request.user.patient_user
             assigned = AdmissionRecord.objects.filter(patient=patient).last().assistant_doctor

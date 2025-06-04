@@ -2,7 +2,7 @@
 body {
   background-image: url('/static/images/medicine.jpg');
   background-size: contain;
-  font-family:'Courier New', Courier, monospace;
+  font-family:'Courier New', Courier;
   margin: 0;
   padding: 0;
   color: #000000;
@@ -15,7 +15,6 @@ body {
   padding: 2rem;
   margin: 2rem auto;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-  font-family: monospace;
   color: #000;
   align-items: center;
   

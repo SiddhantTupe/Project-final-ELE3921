@@ -9,7 +9,6 @@ urlpatterns = [
     path("staff/", views.staff_dashboard, name="staff_dashboard"),
     path('staff/inbox/', views.inbox, name='staff_inbox'),
     path('staff/add-prescription/', views.add_prescription, name='add_prescription'),
-    path("inventory/", views.inventory_dashboard, name="inventory_dashboard"),
     path("patient/<int:patient_id>/", views.patient_dashboard, name="patient_dashboard"),
     path('redirect/', views.after_login_redirect, name='after_login_redirect'),
     path('patient/message/send/', views.send_message, name='send_message'),
