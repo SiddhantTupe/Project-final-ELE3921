@@ -10,8 +10,8 @@
 <div class="main">
 <form method="post" class="form_container">
   <div class="title_container">
-  <h1>Register</h1>
-  <span class="subtitle"><h2>Get started with our app, just create an account and enjoy the experience.</h2></span>
+  <h1 style="padding: 10px;">Register</h1>
+  <span class="subtitle"><h5>Get started with our app, just create an account and a speedy recovery will be on its way!</h5></span>
   </div>
     {% csrf_token %}
 
@@ -24,7 +24,7 @@
       {{ patient_form.as_p }}
     </div>
 
-    <button type="submit">Sign Up</button>
+    <button type="submit" >Sign Up</button>
 </form>
 
 </div>

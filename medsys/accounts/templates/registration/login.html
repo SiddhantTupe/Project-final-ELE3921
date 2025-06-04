@@ -9,18 +9,19 @@
 
 {% block main %}
 <h2>Welcome to MedApp!</h2><br>
+<h1 style="font-family: monospace;">Welcome to MedApp!</h1><br>
 <form method="POST">
     {% csrf_token %}
     <input type="text" name="username" value="{{ username }}" placeholder="Username">
     <input type="password" name="password" placeholder="Password">
     <button type="submit">Log in</button>
     <p class="signup-link">
-    New patient? <a href="{% url 'patient_signup' %}">Signup now</a>
+    New patient? <a href="{% url 'patient_signup' %}" style="color: black;">Sign-up now</a>
     </p>
 </form>
 
 {% if error %}
-<p style="color: red;">{{ error }}</p>
+<p style="color: rgb(169, 0, 0);font-size: medium;">{{ error }}</p>
 {% endif %}
 
 {% endblock %}
