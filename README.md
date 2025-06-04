@@ -15,19 +15,11 @@ This is essentially a comprehensive system for managing medications within a hos
 
 3. Patient Care
 - Stores patient information and medical history
-- Records allergies and previous conditions
 - Tracks hospital admissions and discharges
 - Manages prescriptions and medication schedules
 - Creates detailed dosage schedules (when to take which medicine)
 - Logs every dose given to patients
-- Generates medical reports upon discharge
 
-4. Safety Features
-- Barcode system ensures correct medicine dispensing
-- Allergy tracking prevents harmful prescriptions
-- Minimum stock alerts prevent medicine shortages
-- Complete audit trail of who handled medications
-- Tracks patient reactions to medications
 
 
 
