@@ -1,7 +1,0 @@
-body {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url('/static/images/medicine.jpg');
-  background-size:contain;
-}

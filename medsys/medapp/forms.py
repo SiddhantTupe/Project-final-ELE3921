@@ -38,21 +38,23 @@ class HistoryForm(forms.ModelForm):
         }
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        # Get IDs of patients who already have history
-        used_patients = PatientMedicalHistory.objects.values_list('patient_id', flat=True)
-
-        # If editing an existing record, allow current patient
-        if self.instance and self.instance.pk and self.instance.patient_id in used_patients:
-            used_patients = used_patients.exclude(id=self.instance.patient_id)
-
-        # Filter queryset to exclude those patients
-        self.fields['patient'].queryset = Patient.objects.exclude(id__in=used_patients)
+        
+        # If editing, remove patient field completely
+        if self.instance and self.instance.pk:
+            self.fields.pop('patient')
+        else:
+            used_patients = list(PatientMedicalHistory.objects.values_list('patient_id', flat=True))
+            self.fields['patient'].queryset = Patient.objects.exclude(id__in=used_patients)
         
 class AdmissionForm(forms.ModelForm):
+    assistant_doctor = forms.ModelChoiceField(
+        queryset=User.objects.filter(groups__name="Staff"),
+        required=False,
+        label="Assistant Doctor"
+    )
     class Meta:
         model = AdmissionRecord
-        fields = ['admission_date', 'discharge_date', 'room_number', 'admission_reason', 'discharge_summary', 'status']
+        fields = ['admission_date', 'discharge_date', 'assistant_doctor', 'room_number', 'admission_reason', 'discharge_summary', 'status']
         widgets = {
             'discharge_date': forms.DateInput(attrs={'type': 'date'}),
             'admission_date': forms.DateInput(attrs={'type': 'date'}),
@@ -72,18 +74,25 @@ class AdmissionForm(forms.ModelForm):
         available_choices = sorted(available_choices, key=lambda x: x[0])
         
         self.fields['room_number'].choices = available_choices
+        
     
 class PrescriptionForm(forms.ModelForm):
     class Meta:
         model = Prescription
-        fields = ['patient', 'doctor', 'notes']
+        fields = ['patient', 'medicine', 'dosage', 'duration_days','notes']
+        
+    def __init__(self, *args, **kwargs):
+        doctor = kwargs.pop('doctor', None)  
+        super().__init__(*args, **kwargs)
+
+        if doctor:
+            assigned_patient_ids = AdmissionRecord.objects.filter(
+                assistant_doctor=doctor
+            ).values_list('patient__id', flat=True).distinct()
+
+            self.fields['patient'].queryset = Patient.objects.filter(id__in=assigned_patient_ids)
         
 class MessageForm(forms.ModelForm):
     class Meta:
         model = Message
-        fields = ['recipient', 'subject', 'body']
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # Only show users in the "Staff" group
-        self.fields['recipient'].queryset = User.objects.filter(groups__name='Staff')
+        fields = ['subject', 'body']

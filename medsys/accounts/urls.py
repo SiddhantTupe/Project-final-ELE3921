@@ -4,10 +4,11 @@ from . import views
 
 urlpatterns = [
     path("login/", views.login_view, name="login"),
-    path("auth/logout/", views.logout_view, name="logout"),
+    path("logout/", views.logout_view, name="custom_logout"),
     path("doctor/dashboard", views.doctor_dashboard, name="doctor_dashboard"),
     path("staff/", views.staff_dashboard, name="staff_dashboard"),
     path('staff/inbox/', views.inbox, name='staff_inbox'),
+    path('staff/add-prescription/', views.add_prescription, name='add_prescription'),
     path("inventory/", views.inventory_dashboard, name="inventory_dashboard"),
     path("patient/<int:patient_id>/", views.patient_dashboard, name="patient_dashboard"),
     path('redirect/', views.after_login_redirect, name='after_login_redirect'),

@@ -8,6 +8,11 @@
 {% endblock %}
 
 {% block main %}
+
+<div class="d-flex justify-content-end mb-3">
+  <a href="{% url 'custom_logout' %}" class="btn btn-danger">Logout</a>
+</div>
+
 <div class="container">
   <h2>{{ patient.user.first_name }} {{ patient.user.last_name }}</h2>
 
@@ -47,11 +52,32 @@
       <li><strong>Reason:</strong> {{ admission.admission_reason }}</li>
       <li><strong>Discharge Date:</strong> {{ admission.discharge_date|default:"Ongoing" }}</li>
       <li><strong>Summary:</strong> {{ admission.discharge_summary|default:"-" }}</li>
+      <li><strong>Assistant Doctor:</strong> {{admission.assistant_doctor}}</li>
       <li><strong>Status:</strong> {{ admission.status }}</li>
     {% empty %}
       <li>No admission records found.</li>
     {% endfor %}
   </ul>
+
+  <hr>
+<h3>Prescriptions</h3>
+
+{% if prescriptions %}
+  <ul class="list-group">
+    {% for pres in prescriptions %}
+      <li class="list-group-item">
+        <strong>{{ pres.medicine.name }}</strong><br>
+        {{ pres.dosage }}, {{ pres.frequency }} for {{ pres.duration_days }} days<br>
+        <small>Prescribed by {{ pres.assistant_doctor.get_full_name }} on {{ pres.created_at|date:"F j, Y" }}</small><br>
+        {% if pres.notes %}
+          <em>{{ pres.notes }}</em>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No prescriptions yet.</p>
+{% endif %}
 
   <hr>
   <h3>Need Help?</h3>

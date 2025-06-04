@@ -3,17 +3,20 @@
 {% block title %}Dashboard - MedSys{% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" href="{% static 'doctor_dashboard.css' %}"> 
+<link rel="stylesheet" href="{% static 'doctor.css' %}"> 
 {% endblock %}
 
 {% block main %}
 
+<body>
+
+<div class="d-flex justify-content-end mb-3">
+  <a href="{% url 'custom_logout' %}" class="btn btn-danger">Logout</a>
+</div>
 
 <div class="welcome-banner">   
-    <div class="row align-items-center">
-        <div class="col-md-8">
             <h2>Welcome, Dr. {{ request.user.first_name }} {{ request.user.last_name }}</h2>
-            <h3 class="mt-4">My Patients</h3>
+            <h3 class="mt-4">All Patients</h3>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -42,12 +45,10 @@
                     {% endfor %}
                 </tbody>
             </table>    
-
             <p class="text-muted">{{ today_date|date:"l, F j, Y" }}</p>
-            <p><a href="{% url 'add_patient' %}">New Patients Details</a></p>
-        </div>
-        <div class="col-md-4 text-md-end">
+            <p><a style="color:black;" href="{% url 'add_patient' %}">New Patients Details</a></p>
         </div>
     </div>
-</div>
+</body>
+
 {% endblock %}

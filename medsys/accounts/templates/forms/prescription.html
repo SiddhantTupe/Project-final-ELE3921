@@ -2,13 +2,13 @@
 {% load static %}
 
 {% block styles %}
-<link rel="stylesheet" href="{% static 'add_patient.css' %}">
+<link rel="stylesheet" href="{% static 'signup.css' %}">
 {% endblock %}
 
 {% block main %}
-  <h2>Add Prescription</h2>
-  <form method="post">
+  <form method="post" class="form_container">
     {% csrf_token %}
+      <h2 align="center">Add Prescription</h2>
     {{ form.as_p }}
     <button type="submit">Add Prescription</button>
   </form>

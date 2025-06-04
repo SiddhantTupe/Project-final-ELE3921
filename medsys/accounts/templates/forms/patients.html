@@ -2,14 +2,18 @@
 {% load static %}
 
 {% block styles %}
-<link rel="stylesheet" href="{% static 'add_patient.css' %}">
+<link rel="stylesheet" href="{% static 'patient_add.css' %}">
 {% endblock %}
 
 {% block main %}
+<div class="main">
+<form method="post" class="form_add">
+  <div class="title_container">
   <h1>{% if edit %}Edit {% else %}Add {% endif %}Patient's Details</h1>
-  <form method="post">
-    {% csrf_token %}
-    <h3>Medical History</h3>
+  </div>
+  
+  {% csrf_token %}
+  <h3>Medical History</h3>
   {{ history_form.as_p }}
 
   <h3>Admission Record</h3>

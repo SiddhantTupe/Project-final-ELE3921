@@ -1,4 +1,4 @@
-.form_container {
+.form_add {
   width: fit-content;
   height:fit-content;
   display: flex;
@@ -14,7 +14,7 @@
   border-radius: 11px;
   font-family:monospace;
   overflow-y: auto;
-  transform: scale(0.7);
+  transform: scale(0.95);
 }
 
 h2{
@@ -90,4 +90,7 @@ body {
   color: #ffffff;
   cursor: pointer;
 }
+
+
+
 

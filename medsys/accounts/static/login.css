@@ -108,3 +108,7 @@ button[type="submit"]::after {
   content: "→";
   font-size: 18px;
 }
+
+h2{
+  font-family: monospace  ;
+}

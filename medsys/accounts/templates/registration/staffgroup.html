@@ -3,17 +3,62 @@
 {% block title %}Dashboard - MedSys{% endblock %}
 
 {% block styles %}
-{# <link rel="stylesheet" href="{% static 'doctor_dashboard.css' %}"> #}
+<link rel="stylesheet" href="{% static 'doctor.css' %}"> 
 {% endblock %}
 
-{% block header %} Staff Dashboard {% endblock %}
-{% block content %} 
-<h2>Hello, staff. {{ username }}</h2>
-        <p> Add <a href="{% url 'add_prescription' %}"> New Prescription </a> </p>
+{% block main %}
+
+<div class="d-flex justify-content-end mb-3">
+  <a href="{% url 'custom_logout' %}" class="btn btn-danger">Logout</a>
+</div>
+
+<div class="welcome-banner">
+
+  <h2>Welcome, Dr. {{ request.user.get_full_name }}</h2>
+
+  <h3 class="mt-4">My Patients</h3>
+  <ul class="list-group mb-4">
+    {% for patient in assigned_patients %}
+      <li class="list-group-item">
+        <a href="{% url 'patient_dashboard' patient_id=patient.id %}">
+          {{ patient.user.get_full_name }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h3 class="mt-4">Patients' Prescriptions:</h3>
+  <div class="accordion mb-4" id="prescriptionAccordion">
+    {% for patient, prescriptions in grouped_prescriptions %}
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="false"
+                  aria-controls="collapse{{ forloop.counter }}">
+            {{ patient.user.get_full_name }} ({{ prescriptions|length }} prescriptions)
+          </button>
+        </h2>
+        <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse"
+             aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#prescriptionAccordion">
+          <div class="accordion-body">
+            <ul class="list-group">
+              {% for pres in prescriptions %}
+                <li class="list-group-item">
+                  <strong>{{ pres.medicine.name }}</strong><br>
+                  {{ pres.dosage }}, {{ pres.frequency }} for {{ pres.duration_days }} days<br>
+                  <small>Prescribed on {{ pres.created_at|date:"F j, Y" }}</small>
+                  {% if pres.notes %}<br><em>{{ pres.notes }}</em>{% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
         </div>
-        <div class="col-md-4 text-md-end">
-{% endblock %}
+      </div>
+    {% endfor %}
+  </div>
 
-<a href="{% url 'staff_inbox' %}" class="btn btn-primary">
-  📥 View Inbox
-</a>
+  <p>Add <a href="{% url 'add_prescription' %}">New Prescription</a></p>
+  <a href="{% url 'staff_inbox' %}" class="btn btn-primary">📥 View Inbox</a>
+
+</div>
+{% endblock %}
